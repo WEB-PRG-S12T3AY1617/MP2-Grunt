@@ -15,7 +15,7 @@ class Item(models.Model):
     
     userName = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=300)
-    photo = models.ImageField(upload_to='home/photos/')
+    photo = models.FileField()
     quantity = models.PositiveIntegerField(default=1)
     condition = models.CharField(max_length=200)
     itemType = models.CharField(max_length=100, help_text='Office Use/Academic Use')
