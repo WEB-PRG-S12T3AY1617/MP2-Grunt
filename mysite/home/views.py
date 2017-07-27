@@ -4,8 +4,11 @@ from .models import User, Item, Tags
 
 def index(request):
     latest_item_list = Item.objects.order_by('-pub_date')
-    # context = {'latest_item_list': latest_item_list}
-    return render(request, 'home/header.html', {'latest_item_list': latest_item_list})
+    latest_tag_list = Tags.objects.all()
+    context = {'latest_item_list': latest_item_list,
+              'latest_tag_list': latest_tag_list,
+              }
+    return render(request, 'home/home.html', context)
 
 def profile(request, username_id):
     # return HttpResponse("<h2>This is the profile page of user: " + str(username_id) + "</h2>")
