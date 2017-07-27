@@ -30,7 +30,18 @@
             <h3>{{ item.name }} ({{ item.quantity }})</h3>
               <h6><a href="{% url 'profile' item.userName.id %}">{{ item.userName }}</a></h6>
             <p>Condition: {{ item.condition }}<br/>
-              Type: {{ item.itemType }}</p>
+              <b>Type: {{ item.itemType }}</b></p>
+              
+              <h6>
+              {% if latest_tag_list %}
+                {% for tags in latest_tag_list %}
+<!--                     {% if item.name == tags.itemName %} -->
+                        #{{ tags.tag }}&nbsp;
+<!--                     {% endif %} -->
+                {% endfor %}
+              {% endif %}
+              </h6>
+		  
           </div>
         </div>
         </div>
