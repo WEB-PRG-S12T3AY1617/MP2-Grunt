@@ -21,7 +21,7 @@
     </div>
     
     <ul class="nav nav-pills nav-justified">
-        <li role="presentation" class="active"><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</a></li>
+        <li role="presentation" class="active"><a href="/home/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</a></li>
         <li role="presentation"><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Register/Log In</a></li>
         <li role="presentation"><a href="#"><span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;Post an item</a></li>
     </ul>
@@ -31,7 +31,7 @@
     {% for item in latest_item_list %}
       <div class="col-md-2">
         <div class="thumbnail">
-          <img src="{{ item.photo.url }}" class="img-thumbnail" />
+            <a href="#"><img src="{{ item.photo.url }}" class="img-thumbnail" /></a>
           <div class="caption">
             <h3>{{ item.name }}</h3>
               <h6><a href="/home/{{ item.userName.id }}/">{{ item.userName }}</a></h6>
@@ -40,7 +40,9 @@
   
               <h6>
               {% for tags in latest_tag_list %}
+                  {% if tags.itemName.id == item.id %}
                     #{{ tags.tag }}&nbsp;
+                  {% endif %}
               {% endfor %}
               </h6>
               
