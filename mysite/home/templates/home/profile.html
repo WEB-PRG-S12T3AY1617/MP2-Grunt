@@ -6,7 +6,7 @@
 	{% load staticfiles %}
 	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}" type = "text/css"/>
 	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
-	
+
 	<style type="text/css">
 		html,
 		body {
@@ -19,7 +19,7 @@
     <div class="page-header">
         <center><h1>{{ user.name }}</h1></center>
     </div>
-    
+
     <ul class="nav nav-pills nav-justified">
         <li role="presentation"><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</a></li>
         <li role="presentation"><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Register/Log In</a></li>
@@ -28,11 +28,11 @@
     <br/><br/>
     <center>
     <ul class="list-group">
-        <li class="list-group-item">@{{ user.username }}</li>
-        <li class="list-group-item">{{ user.degree }}</li>
-        <li class="list-group-item">{{ user.office }}</li>
+        <li class="list-group-item"><b>Username:</b> {{ user.username }}</li>
+        <li class="list-group-item"><b>Degree:</b> {{ user.degree }}</li>
+        <li class="list-group-item"><b> Office:</b> {{ user.office }}</li>
     </ul>
     </center>
-    
+
 </body>
 </html>
