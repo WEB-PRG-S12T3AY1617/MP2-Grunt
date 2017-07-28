@@ -1,13 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>User Profile Page</title>
+	<title>User Profile</title>
+	<meta charset="utf-8" />
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}" type = "text/css"/>
+	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
+	
+	<style type="text/css">
+		html,
+		body {
+		  height:100%
+		}
+	</style>
 </head>
-<body>
-    <h1>User Profile</h1>
-    <p>Name: {{ user.name }}</p>
-    <p>Degree Program: {{ user.degree }}</p>
-    <p>Office: {{ user.office }}</p>
+
+<body class="body" style="background-color:#f6f6f6">
+    <div class="page-header">
+        <center><h1>{{ user.name }}</h1></center>
+    </div>
+    
+    <ul class="nav nav-pills nav-justified">
+        <li role="presentation"><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</a></li>
+        <li role="presentation"><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Register/Log In</a></li>
+        <li role="presentation"><a href="#"><span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;Post an item</a></li>
+    </ul>
+    <br/><br/>
+    <center>
+    <ul class="list-group">
+        <li class="list-group-item">@{{ user.username }}</li>
+        <li class="list-group-item">{{ user.degree }}</li>
+        <li class="list-group-item">{{ user.office }}</li>
+    </ul>
+    </center>
+    
 </body>
 </html>
