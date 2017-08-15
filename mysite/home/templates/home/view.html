@@ -1,0 +1,108 @@
+{% extends 'home/base_template.html' %}
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'home:homepage' %}">New Beginnings Marketplace</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="{% url 'home:homepage' %}">
+                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp; Home
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Post an Item
+                    </a>
+                </li>
+            </ul>
+
+            <form class="navbar-form navbar-left" role="search" method="get" action="#">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="q" value="">
+                </div>
+                <button type="submit" class="btn btn-default">Search</button>
+            </form>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                    <a href="{% url 'home:register' %}">
+                        <span class="glyphicon glyphicon-registration-mark" aria-hidden="true"></span>&nbsp; Register
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{% url 'home:login' %}">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Login
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{% url 'home:logout' %}">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+{% block body %}
+
+<body class="body" style="background-color:#f6f6f6">
+
+    <br/>
+    <br/>
+
+<div class="container">
+
+{#    {% if all_items %}#}
+{#        {% for item in all_items %}#}
+    {% if offers_list %}
+        {% for offer in offers_list %}
+          <div class="col-md-2" style="border: 1px solid #e2e2e2; padding: 5px;">
+                {% if offer.itemO %}
+                    <div class="thumbnail">
+                        <img src="{{ offer.itemO.photo.url }}" class="img-thumbnail" />
+                         <div class="caption">
+
+                            <p>{{ offer.itemO.condition }}<br/><b>Type: {{ offer.itemO.itemType }}</b></p>
+                         </div>
+                     </div>
+                {% endif %}
+
+                <p><b>Money: </b> Php. {{ offer.cashO }}</p>
+                <p><b>Message: </b> {{ offer.message }}</p>
+                <h6><b>Offered By: </b><a href="{% url 'home:profile' offer.offerer.id %}">{{ offer.offerer.name }}</a></h6>
+                {% if offer.accept == False and offer.reject == False %}
+                    <a href="/home/view/accept/?offer={{ offer.id }}" class="btn btn-success">Accept</a>
+                    <a href="/home/view/reject/?offer={{ offer.id }}" class="btn btn-warning">Reject</a>
+                {% elif offer.accept == True %}
+                    <h6><b>Response: </b>Approved</h6>
+                    <a href="/home/view/reject/?offer={{ offer.id }}" class="btn btn-warning">Reject</a>
+                {% else %}
+                    <h6><b>Response: </b>Rejected</h6>
+                    <a href="/home/view/accept/?offer={{ offer.id }}" class="btn btn-success">Accept</a>
+                {% endif %}
+          </div>
+        {% endfor %}
+
+    {% else %}
+        <p>No offers available</p>
+
+    {% endif %}
+
+</div>
+
+</body>
+
+{% endblock %}
+

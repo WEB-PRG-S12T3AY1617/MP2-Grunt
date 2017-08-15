@@ -1,0 +1,51 @@
+{% extends 'home/base_template.html' %}
+{% block title %}User Profile{% endblock %}
+
+<html>
+
+	<title>User Profile</title>
+
+{% block body %}
+    <div class="page-header">
+        <center><h1>{{ user.name }}</h1></center>
+    </div>
+
+    <br/><br/>
+    <center>
+    <ul class="list-group">
+        <li class="list-group-item"><b>Username:</b> {{ user.username }}</li>
+        <li class="list-group-item"><b>Degree:</b> {{ user.degree }}</li>
+        <li class="list-group-item"><b> Office:</b> {{ user.office }}</li>
+    </ul>
+    </center>
+
+    <div class="container">
+        {% for item in latest_item_list %}
+            {% if item.userName.id == user.id %}
+                <div class="col-md-2">
+                  <div class="thumbnail">
+                    <a href="#"><img src="{{ item.photo.url }}" class="img-thumbnail" /></a>
+                    <div class="caption">
+                    <h3>{{ item.name }} ({{ item.quantity }})</h3>
+                      <h6><a href="/home/{{ item.userName.id }}/">{{ item.userName }}</a></h6>
+                    <p>{{ item.condition }}<br/>
+                        <b>Type: {{ item.itemType }}</b>
+                        <br/>
+                        <b>{{ item.courseName }}</b></p>
+
+                      <h6>
+                      {% for tags in latest_tag_list %}
+                          {% if tags.itemName.id == item.id %}
+                            #{{ tags.tag }}&nbsp;
+                          {% endif %}
+                      {% endfor %}
+                      </h6>
+
+                    </div>
+                  </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+{% endblock %}

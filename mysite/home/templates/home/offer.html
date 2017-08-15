@@ -1,0 +1,40 @@
+{%  extends 'home/base_template.html' %}
+{% block title %}Offer{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12 col-md-7">
+             <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Offer Money/Product</h3>
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    {% if offer is not None %}
+                        {% if offer.accept %}
+                            <p><strong>Your previous offer was accepted</strong></p>
+                        {% elif offer.reject %}
+                            <p><strong>Your previous offer was rejected</strong></p>
+                        {% else %}
+                            <p><strong>The user has not replied to your previous offer</strong></p>
+                        {% endif %}
+                    {% endif %}
+                    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% include 'home/form_template.html' %}
+                        <input type="hidden" name="item" value="{{ request.GET.post }}">
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-3">
+                                <button type="submit" class="btn btn-block btn-success">Offer</button>
+                            </div>
+                            <div class="col-sm-3">
+                                <a href="{% url 'home:cancelOffer' %}?post={{ request.GET.post }}" class="btn btn-block btn-warning">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+             </div>
+        </div>
+    </div>
+
+{% endblock %}
