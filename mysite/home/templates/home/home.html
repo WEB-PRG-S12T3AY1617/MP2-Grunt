@@ -86,9 +86,9 @@
                              {% endfor %}
                          </h6>
                         {% if 'user' in request.session and request.session.user != item.userName.id%}
-                             <a href="/home/offer/?post={{ item.pk }}">Offer</a>
+                             <a href="/home/offer/?post={{ item.pk }}" class="btn btn-block btn-primary">Offer</a>
                         {% elif 'user' in request.session %}
-                            <a href="/home/view/?post={{ item.pk }}">View Offers</a>
+                            <a href="/home/view/?post={{ item.pk }}" class="btn btn-block btn-primary">View Offers</a>
                         {% endif %}
 
 {#                         <form action="{% url 'home:item-delete' item.name.id %}" method="post" style="display: inline;">#}
